@@ -20,10 +20,9 @@ import os
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 from nacl.signing import SigningKey, VerifyKey
-
 
 # ─── JCS canonicalization (RFC 8785 + AIP-0001) ─────────────────────────
 
@@ -109,7 +108,7 @@ class ReceiptChain:
         return len(self.receipts)
 
     @property
-    def last_hash(self) -> Optional[str]:
+    def last_hash(self) -> str | None:
         if not self.receipts:
             return None
         canonical = _jcs_canonicalize(self.receipts[-1].payload)
@@ -145,7 +144,7 @@ class ReceiptSigner:
         signing_key: SigningKey,
         kid: str,
         issuer: str = "hermes-decision-receipts",
-        agent_id: Optional[str] = None,
+        agent_id: str | None = None,
     ):
         self._signing_key = signing_key
         self._kid = kid
@@ -158,7 +157,7 @@ class ReceiptSigner:
     def generate(
         cls,
         issuer: str = "hermes-decision-receipts",
-        agent_id: Optional[str] = None,
+        agent_id: str | None = None,
     ) -> ReceiptSigner:
         """Generate a new Ed25519 keypair (development/testing).
 
@@ -175,7 +174,7 @@ class ReceiptSigner:
         cls,
         path: str,
         issuer: str = "hermes-decision-receipts",
-        agent_id: Optional[str] = None,
+        agent_id: str | None = None,
     ) -> ReceiptSigner:
         """Load signer from a JSON key file (same format as protect-mcp-adk)."""
         data = json.loads(Path(path).read_text())
@@ -212,14 +211,14 @@ class ReceiptSigner:
         tool_name: str,
         tool_args: dict[str, Any],
         decision: str = "allow",
-        policy_id: Optional[str] = None,
-        policy_hash: Optional[str] = None,
-        skill_version_hash: Optional[str] = None,
-        parent_skill_version_hash: Optional[str] = None,
-        delegation_chain_root: Optional[str] = None,
-        result: Optional[dict[str, Any]] = None,
-        deny_reason: Optional[str] = None,
-        invocation_id: Optional[str] = None,
+        policy_id: str | None = None,
+        policy_hash: str | None = None,
+        skill_version_hash: str | None = None,
+        parent_skill_version_hash: str | None = None,
+        delegation_chain_root: str | None = None,
+        result: dict[str, Any] | None = None,
+        deny_reason: str | None = None,
+        invocation_id: str | None = None,
     ) -> Receipt:
         """Sign a Hermes tool call, producing a receipt.
 
