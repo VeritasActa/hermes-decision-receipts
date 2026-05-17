@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "hermes-decision-receipts"
-version = "0.1.0a1"
+version = "0.1.0"
 description = "Ed25519-signed decision receipts for Nous Research Hermes agent tool calls. Companion to hermes-aps-delegation; conforms to draft-farley-acta-signed-receipts."
 readme = "README.md"
 license = "Apache-2.0"
@@ -14,7 +14,7 @@ authors = [
 ]
 keywords = ["hermes", "nous", "agent", "receipts", "ed25519", "jcs", "governance", "audit", "attestation"]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python :: 3",

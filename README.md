@@ -5,7 +5,7 @@ Ed25519-signed decision receipts for [NousResearch/hermes-agent](https://github.
 **Apache-2.0 · Python 3.10+ · JCS (RFC 8785) + Ed25519 (RFC 8032)**
 
 ```bash
-# v0.1.0-alpha.1 / v0.1.0-rc.1: install from source until PyPI publication
+# v0.1.0: install from source until PyPI publication
 pip install git+https://github.com/ScopeBlind/hermes-decision-receipts.git
 ```
 
@@ -127,7 +127,7 @@ No ScopeBlind or Nous servers are contacted. The verifier is Apache-2.0 and offl
 
 ## Status
 
-**v0.1.0-alpha.1**, April 2026. The APS side and `aeoess/hermes-audit-walker` now exist; the remaining gate for `v0.1.0` is replacing the audit walker mock with this real signer and tagging both sides once the round-trip stays green.
+**v0.1.0**, May 2026. The real signer has been cross-tested against `aeoess/hermes-audit-walker`; basic receipt and APS composition paths pass against the published signer contract.
 
 Not yet on PyPI. Install from source:
 
@@ -137,7 +137,7 @@ cd hermes-decision-receipts
 pip install -e ".[dev]"
 ```
 
-### Known limitations in v0.1.0-alpha.1
+### Known limitations in v0.1.0
 
 - Hermes-specific integration is against **stubbed tool-call interfaces**, since Hermes internals aren't public. The signing layer works; the wiring against an actual Hermes runtime depends on Nous publishing a stable plugin / hook surface.
 - Key management is a local JSON file. Production deployments should use KMS, HSM, or VOPRF-based issuance (see [veritasacta.com](https://veritasacta.com)).
